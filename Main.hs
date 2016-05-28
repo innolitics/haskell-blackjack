@@ -6,8 +6,8 @@ instance Show Suite where
     show Diamonds = "♦"
     show Clubs = "♣"
 
-data Denomination = 
-      Two 
+data Denomination =
+      Two
     | Three
     | Four
     | Five
@@ -32,4 +32,25 @@ instance Show Card where
 
 type Hand = [Card]
 
-main = putStrLn $ show $ Card Three Spades
+handScore :: Hand -> [Int]
+handScore h = map sum $ sequence $ map cardScore h
+
+cardScore :: Card -> [Int]
+cardScore (Card d s) = denominationScore d
+
+denominationScore :: Denomination -> [Int]
+denominationScore Two = [2]
+denominationScore Three = [3]
+denominationScore Four = [4]
+denominationScore Five = [5]
+denominationScore Six = [6]
+denominationScore Seven = [7]
+denominationScore Eight = [8]
+denominationScore Nine = [9]
+denominationScore Ten = [10]
+denominationScore Jack = [10]
+denominationScore Queen = [10]
+denominationScore King = [10]
+denominationScore Ace = [1, 11]
+
+main = putStrLn $ show $ handScore [Card Three Spades, Card Ace Spades]
