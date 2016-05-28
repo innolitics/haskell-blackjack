@@ -1,5 +1,7 @@
 type Hand = [Card]
 
+type Points = Int
+
 data Card = Card Rank Suite
 
 data Suite = Spades | Hearts | Diamonds | Clubs
@@ -12,16 +14,16 @@ main = print $ handPointValues sampleHand
         sampleHand = [Card R2 Spades, Card RA Clubs]
 
 
-handPointValues :: Hand -> [Int]
+handPointValues :: Hand -> [Points]
 handPointValues hand = 
         map sum cardPointPermutations
     where
         cardPointPermutations = sequence $ map cardPointValues hand
 
-cardPointValues :: Card -> [Int]
+cardPointValues :: Card -> [Points]
 cardPointValues (Card rank _) = rankPointValues rank
 
-rankPointValues :: Rank -> [Int]
+rankPointValues :: Rank -> [Points]
 rankPointValues rank = 
     case rank of
         R2 -> [2]
