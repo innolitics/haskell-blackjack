@@ -7,22 +7,23 @@ data Suite = Spades | Hearts | Diamonds | Clubs
 data Rank = R2 | R3 | R4 | R5 | R6 | R7 | R8 | R9 | R10 | RJ | RQ | RK | RA deriving Show
 
 
-main = putStrLn $ show $ handPointValues [
-    Card R2 Spades,
-    Card RA Clubs,
-    Card R3 Hearts,
-    Card RA Spades]
+main = print $ handPointValues sampleHand
+    where
+        sampleHand = [Card R2 Spades, Card RA Clubs]
 
 
 handPointValues :: Hand -> [Int]
-handPointValues h = map sum $ sequence $ map cardPointValues h
+handPointValues hand = 
+        map sum cardPointPermutations
+    where
+        cardPointPermutations = sequence $ map cardPointValues hand
 
 cardPointValues :: Card -> [Int]
-cardPointValues (Card d s) = rankPointValues d
+cardPointValues (Card rank _) = rankPointValues rank
 
 rankPointValues :: Rank -> [Int]
-rankPointValues r = 
-    case r of
+rankPointValues rank = 
+    case rank of
         R2 -> [2]
         R3 -> [3]
         R4 -> [4]
@@ -36,7 +37,7 @@ rankPointValues r =
 
 
 instance Show Card where
-    show (Card d s) = tail $ show d ++ show s
+    show (Card rank suite) = tail $ show rank ++ show suite
 
 instance Show Suite where
     show Spades = "♠"
