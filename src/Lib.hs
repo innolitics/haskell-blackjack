@@ -1,6 +1,10 @@
 module Lib (
     handScores,
-    endlessDeck
+    endlessDeck,
+    Suite(..),
+    Rank(..),
+    Card(..),
+    allCards,
     ) where
 
 import System.Random
@@ -19,17 +23,17 @@ data Suite = Clubs | Diamonds | Hearts | Spades
 data Rank = R2 | R3 | R4 | R5 | R6 | R7 | R8 | R9 | R10 | RJ | RQ | RK | RA
     deriving (Show, Eq, Bounded, Enum)
 
+
+stride = fromEnum (maxBound :: Rank) + 1
+
 instance Enum Card where
     toEnum n = Card (toEnum rankPosition) (toEnum suitePosition)
         where
-            rankPosition = n `div` stride
-            suitePosition = n `mod` stride
-            stride = fromEnum (maxBound :: Suite) + 1
+            suitePosition = n `div` stride
+            rankPosition = n `mod` stride
 
     fromEnum (Card rank suite) =
-            fromEnum suite + stride*(fromEnum rank)
-        where
-            stride = fromEnum (maxBound :: Suite) + 1
+            fromEnum rank + stride*(fromEnum suite)
 
 instance Bounded Card where
     minBound = Card minBound minBound
@@ -63,6 +67,9 @@ instance Random Card where
     --    else let each player decide their next action
     -- perform each action
     --
+
+allCards :: [Card]
+allCards = [minBound..maxBound]
 
 endlessDeck :: StdGen -> [Card]
 endlessDeck g = let (card, g') = random g in card : endlessDeck g'
