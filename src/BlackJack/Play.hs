@@ -9,7 +9,7 @@ import BlackJack.Types
 
 
 endlessDeck :: StdGen -> [Card]
-endlessDeck g = let (card, g') = random g in card : endlessDeck g'
+endlessDeck = randoms
 
 dealerDecide :: Hand -> Action
 dealerDecide hand = if bestScore hand < 17 then Hit else Stand
