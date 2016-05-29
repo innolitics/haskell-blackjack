@@ -1,10 +1,11 @@
 module Main where
 
-import Lib
+import BlackJack.Play
+import BlackJack.Types
 import System.Random
 
 main :: IO ()
 main = do
     let g = mkStdGen 0
         deck = endlessDeck g
-    print allCards
+    print . take 5000 $ deck
