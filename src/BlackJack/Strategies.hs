@@ -1,5 +1,5 @@
 module BlackJack.Strategies (
-    dealerStrategy,
+    dumbStrategy,
 ) where
 
 import BlackJack.Types

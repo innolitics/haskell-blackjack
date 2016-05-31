@@ -6,6 +6,7 @@ module BlackJack.Play (
 import System.Random
 
 import BlackJack.Types
+import BlackJack.Scoring
 
 
 type Chips = Int
