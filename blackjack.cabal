@@ -15,9 +15,10 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     BlackJack.Play, BlackJack.Types
+  exposed-modules:     BlackJack.Play, BlackJack.Types, BlackJack.Scoring, BlackJack.Strategies
   build-depends:       base >= 4.7 && < 5
                      , random
+                     , containers
   default-language:    Haskell2010
 
 executable blackjack-exe

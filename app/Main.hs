@@ -1,11 +1,11 @@
 module Main where
 
+
 import BlackJack.Play
-import BlackJack.Types
-import System.Random
+import BlackJack.Scoring
+
 
 main :: IO ()
 main = do
-    let g = mkStdGen 0
-        deck = endlessDeck g
-    print . take 5000 $ deck
+    let deck = endlessDeck 0
+    print . bestScoreInHand . take 2 $ deck

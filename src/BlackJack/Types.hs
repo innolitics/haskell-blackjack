@@ -3,7 +3,6 @@ module BlackJack.Types (
     RoundState(..),
     Action(..),
     Hand(..),
-    Score(..),
     Card(..),
     Suite(..),
     Rank(..),
@@ -12,15 +11,13 @@ module BlackJack.Types (
 import System.Random
 
 
-type PlayingStrategy = RoundState -> Action
+type PlayingStrategy = (RoundState -> Action)
 
 data RoundState = RoundState { playersHand, dealersHand :: Hand }
 
 data Action = Stand | Double | Hit
 
 type Hand = [Card]
-
-type Score = Int
 
 data Card = Card { rank :: Rank, suite :: Suite }
 
